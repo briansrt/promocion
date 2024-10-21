@@ -12,26 +12,27 @@ export default function Signup({ role }) {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+        try {
+            const response = await fetch('https://promocion-back.vercel.app/user/signup', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(formData),
+            });
 
-    // Ejemplo de petición fetch (puedes modificar la URL y el método según lo necesites)
-    fetch('', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(formData),
-    })
-      .then(response => response.json())
-      .then(data => {
-        console.log('Success:', data);
-      })
-      .catch((error) => {
-        console.error('Error:', error);
-      });
+            if (response.ok) {
+                alert('Usuario creado exitosamente');
+            } else {
+                const data = await response.json();
+                alert(data.message);
+            }
+        } catch (error) {
+            alert('Error al conectar con el servidor');
+        }
   };
-
   return (
     <div className="signup-container">
       <div className="signup-form-container">
