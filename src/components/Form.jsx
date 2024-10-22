@@ -2,7 +2,7 @@ import './styles/Form.css'
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 
-export default function Login() {
+export default function Login({ callback }) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const goTo = useNavigate();
@@ -48,12 +48,12 @@ export default function Login() {
         <form className="login-form" onSubmit={validateUser}>
           <div className="form-group">
             <label htmlFor="email-address">Correo electrónico</label>        
-            <input type="email" autoComplete="email" required placeholder="Correo electrónico" value={email} onChange={(e) => setEmail(e.target.value)}
+            <input type="email" name="email" id="email" autoComplete="email" required placeholder="Correo electrónico" value={email} onChange={(e) => setEmail(e.target.value)}
             />
           </div>
           <div className="form-group">
             <label htmlFor="password">Contraseña</label>
-            <input type="password" autoComplete="current-password" required placeholder="Contraseña" value={password} onChange={(e) => setPassword(e.target.value)}
+            <input type="password" name="password" id="password" autoComplete="current-password" required placeholder="Contraseña" value={password} onChange={(e) => setPassword(e.target.value)}
             />
           </div>
           <button type="submit" className="submit-button">
