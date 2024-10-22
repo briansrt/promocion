@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import './styles/Signup.css';
 
 export default function Signup({ role }) {
@@ -7,6 +7,8 @@ export default function Signup({ role }) {
     email: '', password: '', name: '', phone: '',
     birthdate: '', idNumber: '', city: '', role: role
   });
+  const navigate = useNavigate();
+
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -25,10 +27,15 @@ export default function Signup({ role }) {
 
             if (response.ok) {
                 alert('Usuario creado exitosamente');
-            } else {
+                if (role === 'admin') {
+                  navigate('/AdminHome');  // Redirige al panel de administración
+                } else {
+                  navigate('/UserHome');  // Redirige al panel de usuario
+                }
+              } else {
                 const data = await response.json();
                 alert(data.message);
-            }
+              }
         } catch (error) {
             alert('Error al conectar con el servidor');
         }

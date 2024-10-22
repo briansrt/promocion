@@ -7,17 +7,18 @@ export default function UserHome({ user }) {
   const [registeredCodes, setRegisteredCodes] = useState([]); // Estado para los códigos registrados
   const home = useNavigate();
 
-  if(user!=="user" || !user){
-    return <Navigate to="/"/>
-}
-
+  if (!user || user.role !== 'user') {
+    return <Navigate to="/" />;
+  }
   // Obtener los códigos registrados cuando el componente se monte
   useEffect(() => {
     const fetchRegisteredCodes = async () => {
+
       try {
         const response = await fetch(
           "https://promocion-back.vercel.app/codes/getUserCodes",
           {
+        
             method: "POST",
             headers: {
               "Content-Type": "application/json",
@@ -47,6 +48,7 @@ export default function UserHome({ user }) {
       const response = await fetch(
         "https://promocion-back.vercel.app/codes/registerCode",
         {
+      
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -79,7 +81,7 @@ export default function UserHome({ user }) {
   return (
     <div className="user-home">
       <header className="user-home-header">
-        <h1>Bienvenido, Usuario</h1>
+        <h1>Bienvenido</h1>
         <button onClick={handleLogout} className="logout-button">
           Salir
         </button>

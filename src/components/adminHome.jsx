@@ -1,39 +1,38 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Navigate, useNavigate } from "react-router-dom";
 import './styles/AdminHome.css';
 
-export default function AdminHome() {
-    const [winners, setWinners] = useState([
-        {
-        date: '2023-05-15',
-        name: 'Juan Pérez',
-        idNumber: '1234567890',
-        phone: '3001234567',
-        city: 'Bogotá',
-        code: 'ABC123',
-        prize: 'Camiseta'
-        },
-        {
-        date: '2023-05-16',
-        name: 'María Rodríguez',
-        idNumber: '0987654321',
-        phone: '3109876543',
-        city: 'Medellín',
-        code: 'XYZ789',
-        prize: 'Gorra'
-        },
-        {
-        date: '2023-05-17',
-        name: 'Carlos Gómez',
-        idNumber: '5678901234',
-        phone: '3205678901',
-        city: 'Cali',
-        code: 'DEF456',
-        prize: 'Mochila'
-        }
-    ]);
-
+export default function AdminHome({ user }) {
+    const [winners, setWinners] = useState([]);
     const home = useNavigate();
+
+    if (!user || user.role !== 'admin') {
+        return <Navigate to="/" />;
+    }
+
+    useEffect(() => {
+        const fetchWinners = async () => {
+            try {
+                const response = await fetch('https://promocion-back.vercel.app/codes/getWinners', {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    }
+                });
+
+                if (response.ok) {
+                    const result = await response.json();
+                    setWinners(result.data);
+                } else {
+                    alert('Error al cargar los ganadores');
+                }
+            } catch (error) {
+                alert('Error al conectar con el servidor');
+            }
+        };
+
+        fetchWinners();
+    }, []);
 
     const handleLogout = () => {
         home("/");
@@ -41,44 +40,44 @@ export default function AdminHome() {
 
     return (
         <div className="admin-home">
-        <header className="admin-home-header">
-            <h1>Panel de Administración</h1>
-            <button onClick={handleLogout} className="logout-button">Salir</button>
-        </header>
-        
-        <main>
-            <section className="winners-section">
-            <h2>Tabla de Ganadores</h2>
-            <div className="table-container">
-                <table className="winners-table">
-                <thead>
-                    <tr>
-                    <th>Fecha</th>
-                    <th>Nombre</th>
-                    <th>Cédula</th>
-                    <th>Celular</th>
-                    <th>Ciudad</th>
-                    <th>Código</th>
-                    <th>Premio</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {winners.map((winner, index) => (
-                    <tr key={index}>
-                        <td>{winner.date}</td>
-                        <td>{winner.name}</td>
-                        <td>{winner.idNumber}</td>
-                        <td>{winner.phone}</td>
-                        <td>{winner.city}</td>
-                        <td>{winner.code}</td>
-                        <td>{winner.prize}</td>
-                    </tr>
-                    ))}
-                </tbody>
-                </table>
-            </div>
-            </section>
-        </main>
+            <header className="admin-home-header">
+                <h1>Panel de Administración</h1>
+                <button onClick={handleLogout} className="logout-button">Salir</button>
+            </header>
+            
+            <main>
+                <section className="winners-section">
+                    <h2>Tabla de Ganadores</h2>
+                    <div className="table-container">
+                        <table className="winners-table">
+                            <thead>
+                                <tr>
+                                    <th>Fecha</th>
+                                    <th>Nombre</th>
+                                    <th>Cédula</th>
+                                    <th>Celular</th>
+                                    <th>Ciudad</th>
+                                    <th>Código</th>
+                                    <th>Premio</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {winners.map((winner, index) => (
+                                    <tr key={index}>
+                                        <td>{winner.date}</td>
+                                        <td>{winner.userInfo.nombre}</td>
+                                        <td>{winner.userInfo.cedula}</td>
+                                        <td>{winner.userInfo.celular}</td>
+                                        <td>{winner.userInfo.ciudad}</td>
+                                        <td>{winner.code}</td>
+                                        <td>{winner.value}</td>
+                                    </tr>
+                                ))}
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+            </main>
         </div>
     );
 }

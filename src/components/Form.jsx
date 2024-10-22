@@ -20,13 +20,12 @@ export default function Login({ callback }) {
         
         if (response.ok) {
             const data = await response.json();
-            console.log('Data:', data);
+            
             if (data.status === 'Bienvenido') {
+              callback(data);
                 if (data.role === 'user') {
-                    callback('user');
                     goTo('/userHome');
                 } else if (data.role === 'admin') {
-                    callback('admin');
                     goTo('/adminHome');
                 }
             } else if (data.status === 'ErrorCredenciales') {
