@@ -16,8 +16,8 @@ function App() {
         <Route path="/Signup" element={<Signup role="user"/>} />
         <Route path="/SignupAdmin" element={<Signup role="admin"/>} />
         <Route path="/Form" element={<Form />} />
-        <Route path="/userHome" element={<UserHome user={user}/>} />
-        <Route path="/adminHome" element={<AdminHome user={user}/>} />
+        <Route path="/userHome" element={<UserHome user={user}/>}></Route>
+        <Route path="/adminHome" element={<AdminHome user={user}/>}></Route>
       </Routes>
     </BrowserRouter>
   )
