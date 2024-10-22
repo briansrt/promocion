@@ -40,38 +40,38 @@ export default function Signup({ role }) {
         <form className="signup-form" onSubmit={handleSubmit}>
           <div className="form-group">
             <label htmlFor="email">Correo electrónico</label>
-            <input type="email" autoComplete="email" required placeholder="Correo electrónico" value={formData.email} onChange={handleChange}
+            <input type="email" name="email" id="email" autoComplete="email" required placeholder="Correo electrónico" value={formData.email} onChange={handleChange}
             />
           </div>
           <div className="form-group">
             <label htmlFor="password">Contraseña</label>
-            <input type="password" autoComplete="new-password" required placeholder="Contraseña" value={formData.password} onChange={handleChange}
+            <input type="password" name="password" id="password" autoComplete="new-password" required placeholder="Contraseña" value={formData.password} onChange={handleChange}
             />
           </div>
           <div className="form-group">
             <label htmlFor="name">Nombre</label>
-            <input type="text" autoComplete="name" required placeholder="Nombre" value={formData.name}
+            <input type="text" name="name" id="name" autoComplete="name" required placeholder="Nombre" value={formData.name}
               onChange={handleChange}
             />
           </div>
           <div className="form-group">
             <label htmlFor="phone">Celular</label>
-            <input type="tel" autoComplete="tel" required placeholder="Celular" value={formData.phone}
+            <input type="tel" name="phone" id="phone" autoComplete="tel" required placeholder="Celular" value={formData.phone}
               onChange={handleChange}
             />
           </div>
           <div className="form-group">
             <label htmlFor="birthdate">Fecha de nacimiento</label>
-            <input type="date" required value={formData.birthdate} onChange={handleChange} />
+            <input type="date" name="birthdate" id="birthdate" required value={formData.birthdate} onChange={handleChange} />
           </div>
           <div className="form-group">
             <label htmlFor="idNumber">Cédula</label>
-            <input type="text" required placeholder="Cédula" value={formData.idNumber} onChange={handleChange}
+            <input type="text" name="idNumber" id="idNumber" required placeholder="Cédula" value={formData.idNumber} onChange={handleChange}
             />
           </div>
           <div className="form-group">
             <label htmlFor="city">Ciudad</label>
-            <input type="text" required placeholder="Ciudad" value={formData.city} onChange={handleChange}
+            <input type="text" name="city" id="city" required placeholder="Ciudad" value={formData.city} onChange={handleChange}
             />
           </div>
           <button type="submit" className="submit-button">
