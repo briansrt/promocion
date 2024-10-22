@@ -27,11 +27,7 @@ export default function Signup({ role }) {
 
             if (response.ok) {
                 alert('Usuario creado exitosamente');
-                if (role === 'admin') {
-                  navigate('/AdminHome');  // Redirige al panel de administración
-                } else {
-                  navigate('/UserHome');  // Redirige al panel de usuario
-                }
+                navigate('/Form');  // Redirige al panel de administración
               } else {
                 const data = await response.json();
                 alert(data.message);
