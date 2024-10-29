@@ -9,6 +9,7 @@ export default function Signup({ role }) {
   });
   const [departamentos, setDepartamentos] = useState([]);
   const [ciudades, setCiudades] = useState([]);
+  const [selectedDepartamento, setSelectedDepartamento] = useState('');
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -25,9 +26,13 @@ export default function Signup({ role }) {
     fetchDepartamentos();
   }, []);
   const handleDepartamentoChange = (e) => {
-    const selectedDepartamento = departamentos.find(d => d.departamento === e.target.value);
-    setCiudades(selectedDepartamento ? selectedDepartamento.ciudades : []);
-    setFormData({ ...formData, departamento: e.target.value, city: '' });
+    const departamentoSeleccionado = e.target.value;
+    setSelectedDepartamento(departamentoSeleccionado);
+
+    // Filtrar las ciudades basadas en el departamento seleccionado
+    const departamento = departamentos.find(dep => dep.departamento === departamentoSeleccionado);
+    setCiudades(departamento ? departamento.ciudades : []);
+    setFormData({ ...formData, city: '' }); // Limpiar el campo de ciudad
   };
 
 
