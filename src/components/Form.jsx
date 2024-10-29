@@ -43,15 +43,15 @@ export default function Login({ callback }) {
   return (
     <div className="login-container">
       <div className="login-form-container">
-        <h2>Iniciar sesión</h2>
+        <h2 className="h2Login">¡Entra y gana como loco!</h2>
         <form className="login-form" onSubmit={validateUser}>
           <div className="form-group">
-            <label htmlFor="email-address">Correo electrónico</label>        
+            <label id='labellogin' htmlFor="email-address">Correo electrónico</label>        
             <input type="email" name="email" id="email" autoComplete="email" required placeholder="Correo electrónico" value={email} onChange={(e) => setEmail(e.target.value)}
             />
           </div>
           <div className="form-group">
-            <label htmlFor="password">Contraseña</label>
+            <label id='labellogin' htmlFor="password">Contraseña</label>
             <input type="password" name="password" id="password" autoComplete="current-password" required placeholder="Contraseña" value={password} onChange={(e) => setPassword(e.target.value)}
             />
           </div>

@@ -3,7 +3,6 @@
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-    background-color: #f3f4f6;
   }
   
   .login-form-container {
@@ -15,10 +14,11 @@
     max-width: 400px;
   }
   
-  h2 {
+  .h2Login {
     text-align: center;
-    color: #333;
+    color: #4f46e5;
     margin-bottom: 1.5rem;
+    animation: bounce 1s ease infinite alternate;
   }
   
   .login-form {
@@ -30,7 +30,7 @@
     margin-bottom: 1rem;
   }
   
-  label {
+  #labellogin {
     display: block;
     margin-bottom: 0.5rem;
     color: #4b5563;
@@ -39,7 +39,7 @@
   input {
     width: 100%;
     padding: 0.5rem;
-    border: 1px solid #d1d5db;
+    border: 1px solid #4f46e5;
     border-radius: 0.25rem;
     font-size: 1rem;
   }
@@ -77,4 +77,13 @@
   
   .signup-link a:hover {
     text-decoration: underline;
+  }
+
+  @keyframes bounce{
+    0% {
+      transform: translateY(0);
+    }
+    100% {
+      transform: translateY(-10px);
+    }
   }

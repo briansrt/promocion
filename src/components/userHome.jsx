@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Navigate } from "react-router-dom";
 import "./styles/UserHome.css";
 
 export default function UserHome({ user }) {
@@ -81,7 +81,7 @@ export default function UserHome({ user }) {
   return (
     <div className="user-home">
       <header className="user-home-header">
-        <h1>Bienvenido</h1>
+        <h1>Bienvenido {user.nombre}</h1>
         <button onClick={handleLogout} className="logout-button">
           Salir
         </button>
