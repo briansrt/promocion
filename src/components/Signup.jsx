@@ -32,7 +32,7 @@ export default function Signup({ role }) {
     // Filtrar las ciudades basadas en el departamento seleccionado
     const departamento = departamentos.find(dep => dep.departamento === departamentoSeleccionado);
     setCiudades(departamento ? departamento.ciudades : []);
-    setFormData({ ...formData, city: '' }); // Limpiar el campo de ciudad
+    setFormData({ ...formData, departamento: departamentoSeleccionado, city: '' }); // Limpiar el campo de ciudad
   };
 
 
